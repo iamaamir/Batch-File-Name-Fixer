@@ -1,36 +1,33 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 # Author: Varun Upadhyay
-# Batch Renaming of Files
-# Give the path to the folder which contains the files in os.listdir and os.chdir function
 
-import os
 
-# Getting the initial count of files in the folder
-initial_count = 0
-for i in os.listdir("/home/varun/Desktop/Github Projects/CodeKata/Python"): 
-	initial_count += 1
+from os import listdir, chdir, rename
 
-# Valid set of characters in a file
-alpha_arr = list('abcdefghijklmnopqrstuvwxyz0123456789.')
+# Valid chars in a file name
+valid_chars = 'abcdefghijklmnopqrstuvwxyz0123456789._'
+# dir_path = "/home/varun/Desktop/Github Projects/CodeKata/Python"
+dir_path = "/home/aamir_khan/Desktop/mails/"
+dir_list = listdir(dir_path)
 
-for i in os.listdir("/home/varun/Desktop/Github Projects/CodeKata/Python"):
-	ans = ''
-	for j in i:
-		if j.lower() in alpha_arr:
-			ans += j
-		else:
-			if j == ' ':
-				ans += '_'
-	os.chdir("/home/varun/Desktop/Github Projects/CodeKata/Python")
-	os.rename(i, ans)
+total_files = len(dir_list)
+
+for i in dir_list:
+    ans = ''
+    for j in i:
+        if j.lower() in valid_chars:
+            ans += j
+        else:
+            if j == ' ':
+                ans += '_'
+    chdir(dir_path)
+    rename(i, ans)
 
 # Getting the final count of files in the folder after renaming
-final_count = 0
-for i in os.listdir("/home/varun/Desktop/Github Projects/CodeKata/Python"):
-	final_count += 1
+final_count = len(dir_list)
 
 # Final Verification
-print('Number of files present initially: ' + str(initial_count))
-print('Number of file renamed: ' + str(final_count))
-print('Difference: ' + str(initial_count - final_count))
-
-
+print('Number of files present initially: ', total_files)
+print('Number of file renamed: ', final_count)
+print('Difference: ', (total_files - final_count))
