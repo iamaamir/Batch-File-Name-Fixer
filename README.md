@@ -2,4 +2,4 @@
 a simple script that fix your file names
 
 # usage
-`python3 mail.py`
+`python3 main.py`
